@@ -1,19 +1,26 @@
 function verCidades()
 {
-    fetch("http://localhost:5000/city")
+    fetch("http://localhost:3000/city")
     .then(response => response.json())
-    .then(data => escreveCidade(data))
+    .then(data => preencheTabela(data))
     .catch((err)=>{
         alert('Falha no sistema')
     })
 }
 
-function escreveCidade(data)
+function preencheTabela(data)
 {
+    document.getElementById('tabela').innerHTML = ""
     for(let i=0;i<10;i++)
         {
             let city = data[i].Name
-            let row =`<p>${city} </p>`
-            document.getElementById('cidades').innerHTML += row
+            let district = data[i].District
+            let populacao = data[i].Population
+            let row =` <tr>
+            <td>${city}</td>
+            <td>${district}</td>
+            <td>${populacao}</td>
+            </tr>`
+            document.getElementById('tabela').innerHTML += row
         }
 }
